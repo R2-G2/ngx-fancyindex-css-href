@@ -1,8 +1,10 @@
-<!-- Copyright (c) 2022 Ralf Grawunder -->
+<!-- Copyright (c) 2022-2023 Ralf Grawunder -->
 
 # ngx-fancyindex-css-href: override the default CSS
 
 ## Usage
+
+### General
 
 Tell the [**Nginx Fancy Index module**](https://github.com/aperezdc/ngx-fancyindex) to load an aliased CSS file with
 *SSI* enabled.
@@ -13,24 +15,26 @@ location / {
     fancyindex_css_href /fancyindex.css;
 
     location = /fancyindex.css {
-        # git clone https://gist.github.com/452522be0ef3813c45a5dee5b11ef539.git /opt/ngx-fancyindex-css-href
-        alias /opt/ngx-fancyindex-css-href/fancyindex.css;
+        # git clone https://github.com/R2-G2/ngx-fancyindex-css-href.git /CUSTOM/PATH
+        alias /CUSTOM/PATH/fancyindex.css;
         ssi on;
         ssi_types text/css;
     }
 }
 ```
 
-You can also define you own (e.g. dark) colors.
+### Personal
+
+You can also define your own (e.g. dark) colors separately for any directory.
 
 ```nginx
 location /DIRECTORY/ {
     fancyindex on;
-    fancyindex_css_href /DIRECTORY/DARK.css;
+    fancyindex_css_href /DIRECTORY/dark.css;
 
-    location = /DIRECTORY/DARK.css {
-        # git clone https://gist.github.com/452522be0ef3813c45a5dee5b11ef539.git /CUSTOM/PATH
-        alias /CUSTOM/PATH/fancyindex.css;
+    location = /DIRECTORY/dark.css {
+        # git clone https://github.com/R2-G2/ngx-fancyindex-css-href.git /opt/ngx-fancyindex-css-href
+        alias /opt/ngx-fancyindex-css-href/fancyindex.css;
         ssi on;
         ssi_types text/css;
         set $ficss_color_background_normal "#000";
